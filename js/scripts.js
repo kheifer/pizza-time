@@ -39,18 +39,18 @@ Pizza.prototype.pizzaCost = function (){
 };
 
 $(document).ready(function(){
-  var inputCheese = $('.cheese:checked').val();
-  var inputPizzaSize = $('.pizza-size:checked').val();
-  var inputCheeseType = $('.cheese-type:checked').val();
-  var newPizza = new Pizza(inputPizzaSize, inputCheese, inputCheeseType);
-  $(".veggie-type:checked").each(function(){
-    newPizza.vegOptions($(this).val());
-  });
-  $('.meat-type:checked').each(function(){
-    newPizza.meatOptions($(this).val());
-  });
   $("form#pizza-order").submit(function(event) {
     event.preventDefault();
+    var inputCheese = $('input[name="cheese"]:checked').val();
+    var inputPizzaSize = $('input[name="pizza-size"]:checked').val();
+    var inputCheeseType = $('input[name="cheese-type"]:checked').val();
+    var newPizza = new Pizza(inputPizzaSize, inputCheese, inputCheeseType);
+    $("input:checkbox[name=veggie-type]:checked").each(function(){
+      newPizza.vegOptions($(this).val());
+    });
+    $('input[name="meat-type"]:checked').each(function(){
+      newPizza.meatOptions($(this).val());
+    });
     $(".pizza-size").text(newPizza.pizzaSize);
     $(".cheese").text(newPizza.cheese);
     $(".veggie-toppings").text(newPizza.veggies);
